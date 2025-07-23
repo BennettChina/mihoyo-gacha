@@ -1,0 +1,20 @@
+{
+  "name" : "mihoyo-gacha",
+  "author" : "Bennett",
+  "private" : true,
+  "license" : "MIT",
+  "version" : "1.0.0",
+  "description" : "这是一个基于 SilveryStar/Adachi-BOT 应用于 QQ 的miHoYo抽卡分析插件。",
+  "dependencies" : {
+    "exceljs" : "^4.4.0",
+    "@aws-sdk/client-s3" : "^3.433.0",
+    "qrcode" : "^1.5.3",
+    "chokidar" : "^3.5.3",
+    "user-agents" : "^1.1.239",
+    "platform" : "^1.3.6"
+  },
+  "devDependencies" : {
+    "@types/user-agents" : "^1.0.4",
+    "@types/platform" : "^1.3.6"
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>米哈游抽卡分析 - Adachi-BOT</title>
+	<meta content="支持绝区零、崩坏：星穹铁道、原神的抽卡分析工具" name="description">
+	<meta content="抽卡分析,绝区零,崩坏星穹铁道,原神,miHoYo" name="keywords">
+	
+	<!-- 预加载关键资源 -->
+	<link as="script" href="../assets/js/vue@3.5.17.global.prod.js" rel="preload">
+	<link as="script" href="../assets/js/echarts@5.6.0-line.min.js" rel="preload">
+	<link as="script" href="../assets/js/vue-echarts@6.5.5.min.js" rel="preload">
+	<!-- 样式文件 -->
+	<link href="../assets/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<div id="app-container"></div>
+
+<!-- Vue 3 -->
+<script src="../assets/js/vue@3.5.17.global.prod.js"></script>
+<!-- ECharts -->
+<script src="../assets/js/echarts@5.6.0-line.min.js"></script>
+<script src="../assets/js/vue-echarts@6.5.5.min.js"></script>
+
+<!-- 主组件 -->
+<script type="module">
+	import {GachaAnalysis} from '../components/index.js';
+	
+	const {createApp} = Vue;
+	
+	// 创建应用
+	createApp(GachaAnalysis).mount('#app-container');
+</script>
+</body>
+</html>

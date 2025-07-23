@@ -1,0 +1,391 @@
+/**
+ * 米哈游抽卡分析主样式文件
+ * 包含所有组件的样式定义
+ */
+
+@font-face {
+	font-family: GachaFont;
+	src: url("../fonts/GachaFont.ttf");
+}
+
+body {
+	font-family: GachaFont, 'PingFang SC', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f0f2f5;
+}
+
+/* 主应用样式 */
+
+#app {
+	max-width: 1302px;
+	margin: 40px auto;
+	padding: 32px;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+	background: var(--app-background);
+}
+
+.flex-row {
+	display: flex;
+	gap: 32px;
+}
+
+/* 游戏主题样式 */
+.theme-zzz {
+	background: linear-gradient(135deg, #f5f2e9 0%, #faf9f5 100%);
+}
+
+.theme-sr {
+	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.theme-genshin {
+	background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+/* 用户信息卡片样式 */
+.user-info-card {
+	background: var(--user-background-image);
+	background-size: cover;
+	background-position: center;
+	border-radius: 16px;
+	padding: 24px 0 16px 0;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 16px rgba(24, 24, 28, 0.3);
+	border: 1.5px solid var(--border-color);
+	margin-bottom: 32px;
+
+}
+
+.user-avatar {
+	margin-left: 24px;
+}
+
+.user-avatar img {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	border: 3px solid var(--primary-color);
+	object-fit: cover;
+
+}
+
+.user-basic {
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	flex: 1;
+}
+
+.user-name {
+	font-size: 24px;
+	font-weight: bold;
+	color: var(--user-text-color);
+	margin-bottom: 10px;
+	letter-spacing: 1px;
+}
+
+.user-details {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	font-size: 14px;
+	color: var(--primary-color);
+}
+
+.user-level {
+	padding: 4px 8px;
+	background: linear-gradient(90deg, var(--gradient-special-start), var(--gradient-special-end));
+	border-radius: 12px;
+	color: var(--user-text-color);
+	font-weight: 600;
+	font-size: 12px;
+}
+
+.user-server {
+	position: relative;
+	padding: 0 16px;
+	border-left: 1px solid var(--primary-color);
+	border-right: 1px solid var(--primary-color);
+}
+
+.user-uid {
+	font-family: 'Courier New', monospace;
+	font-weight: 600;
+}
+
+/* 分析数据卡片样式 */
+.analysis-card {
+	flex: 1;
+	background: linear-gradient(180deg, var(--primary-color) 90%, rgba(255, 251, 230, 0.1) 100%);
+	border-radius: 16px;
+	padding: 28px 32px 20px 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 2px 16px rgba(24, 24, 28, 0.3);
+	border: 1.5px solid var(--primary-color);
+	min-width: 480px;
+	max-width: 600px;
+	margin: 0 auto;
+
+}
+
+.analysis-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--text-color);
+	margin-bottom: 18px;
+	letter-spacing: 2px;
+	/*text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);*/
+}
+
+.analysis-data {
+	width: 100%;
+}
+
+.analysis-row {
+	display: flex;
+	justify-content: flex-start;
+	gap: 32px;
+	margin-bottom: 12px;
+}
+
+.analysis-item {
+	flex: 1;
+	min-width: 90px;
+	text-align: left;
+	padding: 8px;
+	border-radius: 8px;
+	background: var(--secondary-color);
+	backdrop-filter: blur(10px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.item-value {
+	font-size: 24px;
+	font-weight: bold;
+	color: var(--text-color);
+	margin-bottom: 4px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.item-label {
+	font-size: 14px;
+	color: rgba(108, 108, 108, 0.9);
+	margin-top: 2px;
+	font-weight: 500;
+}
+
+.achievement-eval {
+	margin-top: 18px;
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--text-color);
+	text-align: center;
+	padding: 12px 24px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	display: flex;
+	align-items: center;
+}
+
+.eval-result-box {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.eval-label {
+	color: var(--text-color);
+	min-width: 90px;
+}
+
+.eval-result {
+	font-weight: bold;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.eval-excellent {
+	background: #B4CB92;
+	border: 1px solid #B4CB92;
+}
+
+.eval-normal {
+	background: rgba(108, 108, 108, 0.1);
+	border: 1px solid rgba(108, 108, 108, 0.3);
+}
+
+.eval-poor {
+	background: #E3AF88;
+	border: 1px solid #E3AF88;
+}
+
+.eval-excellent, .eval-poor, .eval-normal {
+	border-radius: 10px;
+	padding: 8px;
+	font-size: 12px;
+}
+
+/* 抽卡池卡片样式 */
+.gacha-pool-card {
+	background: var(--gacha-background);
+	border-radius: 16px;
+	padding: 28px;
+	box-shadow: 0 2px 16px rgba(24, 24, 28, 0.3);
+	border: 1.5px solid var(--border-color);
+
+}
+
+.pool-title {
+	font-weight: 700;
+	margin-bottom: 20px;
+	color: var(--gacha-text-color);
+	font-size: 20px;
+	letter-spacing: 1px;
+}
+
+.pool-flex {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.pool-block {
+	font-weight: 600;
+	color: var(--gacha-text-color);
+	margin-bottom: 12px;
+	/*margin-bottom: 4px;*/
+	font-size: 16px;
+	letter-spacing: 0.5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.pool-items {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-start;
+}
+
+.pool-item-avatar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 64px;
+	margin: 0 4px;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(24, 24, 28, 0.3);
+	overflow: hidden;
+	position: relative;
+}
+
+.avatar-container {
+	width: 100%;
+	height: 64px;
+	position: relative;
+}
+
+.avatar-container::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/5-Star.png");
+	background-size: cover;
+	background-position: center;
+	border-radius: 12px 12px 0 0;
+	z-index: 0;
+	transition: opacity 0.3s ease;
+}
+
+.avatar-container img {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	height: 64px;
+	border-radius: 12px 12px 0 0;
+	object-fit: cover;
+	display: block;
+}
+
+.avatar-count {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 6px 0;
+	border-radius: 0 0 12px 12px;
+	margin: 0;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.count-low {
+	background: linear-gradient(135deg, #ff4d4f, #ff7875);
+}
+
+.count-mid {
+	background: linear-gradient(135deg, #faad14, #ffc53d);
+}
+
+.count-high {
+	background: linear-gradient(135deg, #52c41a, #73d13d);
+}
+
+.count-veryhigh {
+	background: linear-gradient(135deg, #ffd700, #ffec3d);
+	color: #23242a;
+}
+
+/* 稀有度样式 */
+.rarity-5 {
+	border: 2px solid #ffd700;
+	box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.rarity-4 {
+	border: 2px solid #a855f7;
+	box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.rarity-3 {
+	border: 2px solid #3b82f6;
+	box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.chart-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--text-color);
+	margin-bottom: 16px;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+.chart-container {
+	margin-top: 20px;
+	height: 400px;
+}
+
+.crooked {
+	background-color: #18181c;
+	color: #ff4d4f;
+	font-size: 12px;
+	padding: 2px 4px;
+	border-radius: 50%;
+	position: absolute;
+	right: 0;
+	border: 2px solid #ff4d4f;
+	z-index: 10;
+}

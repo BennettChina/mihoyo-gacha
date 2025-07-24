@@ -115,6 +115,7 @@ s3:
 
 # 其他配置
 qrcode: false           # 是否显示二维码
+migrate: false          # 是否从其他插件中复制数据
 aliases: [ "抽卡分析" ]    # 插件别名
 ```
 

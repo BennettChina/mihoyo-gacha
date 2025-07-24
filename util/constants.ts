@@ -5,6 +5,8 @@ export const DB_KEY_GACHA_URL_DEFAULT: string = "$prefix.gacha.api.$qq.1";
 export const DB_KEY_GACHA_URL: string = "$prefix.gacha.api.$qq.$sn";
 export const DB_KEY_GACHA_HTML_URL: string = "$prefix.gacha.html.$qq.$sn";
 export const DB_KEY_GACHA_DATA: string = "$prefix.gacha.data.$uid.$gacha_type";
+// 迁移状态
+export const DB_KEY_MIGRATION_STATUS: string = "adachi.mihoyo-gacha.migration.status";
 
 // 缓存过期时间常量
 export const DB_EXPIRE_24H: number = 24 * 60 * 60;

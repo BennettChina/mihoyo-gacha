@@ -11,11 +11,13 @@ import { MetaManagement } from "#/mihoyo-gacha/module/meta";
 import { Logger } from "log4js";
 import { GachaHistoryUpItem } from "#/mihoyo-gacha/module/history-up";
 import { GameAvatar } from "#/mihoyo-gacha/module/avatar";
+import { Migration } from "#/mihoyo-gacha/module/migration";
 
 type Config = {
 	tips: string;
 	s3: OSSConfig;
 	qrcode: boolean;
+	migrate: boolean;
 	aliases: string[]
 }
 
@@ -41,6 +43,7 @@ const initConfig: Config = {
 		region: ""
 	},
 	qrcode: false,
+	migrate: false,
 	aliases: [ "抽卡分析" ]
 };
 export let gacha_config: ExportConfig<Config>;
@@ -136,6 +139,10 @@ export default definePlugin( {
 		metaManagement.watchStart();
 		historyUpItem = new GachaHistoryUpItem();
 		gameAvatar = new GameAvatar();
+		if ( gacha_config.migrate ) {
+			// 迁移数据
+			await new Migration( params.redis, params.logger ).migrate();
+		}
 		renderer = params.renderRegister( "#app", "views" );
 		params.logger.info( "[miHoYo抽卡分析] - 初始化完成!" );
 	},

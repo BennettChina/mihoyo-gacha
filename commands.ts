@@ -41,7 +41,7 @@ const import_gacha_log: OrderConfig = {
 	headers: [ "导入记录" ],
 	priority: 99,
 	regexps: [ "(原神|星铁|绝区零)", "(json|excel)", "(https?:\\/\\/(?:www\\.)?[-a-zA-Z\\d@:%._+~#=]{1,256}\\.[a-zA-Z\\d()]{1,6}\\b[-a-zA-Z\\d()!@:%_+.~#?&/=]*)?" ],
-	detail: "导入抽卡记录，目前支持UIGF v4.0 的 json，兼容 excel 和 UIGF v3.0、SRGF v1.0 的 json 格式。",
+	detail: "导入抽卡记录，目前支持UIGF v4.0 的 json，兼容 excel 和 UIGF v3.0、SRGF v1.0 的 json 格式。\n可以使用直接使用文件的下载链接或者先发送文件然后引用该文件消息的同时使用该指令。",
 	ignoreCase: false,
 	main: "achieves/universal-import"
 };

@@ -332,7 +332,7 @@ body {
 }
 
 .count-low {
-	background: linear-gradient(135deg, #ff4d4f, #ff7875);
+	background: linear-gradient(135deg, #52c41a, #73d13d);
 }
 
 .count-mid {
@@ -340,12 +340,7 @@ body {
 }
 
 .count-high {
-	background: linear-gradient(135deg, #52c41a, #73d13d);
-}
-
-.count-veryhigh {
-	background: linear-gradient(135deg, #ffd700, #ffec3d);
-	color: #23242a;
+	background: linear-gradient(135deg, #ff4d4f, #ff7875);
 }
 
 /* 稀有度样式 */

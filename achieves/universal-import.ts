@@ -2,10 +2,12 @@ import { defineDirective, InputParameter } from "@/modules/command";
 import fetch from "node-fetch";
 import { Gacha_Info, GachaUserInfo, GameType, Standard_Gacha, UIGF_v4 } from "#/mihoyo-gacha/util/types";
 import { fakeIdFn, generateRedisKey } from "#/mihoyo-gacha/util/util";
-import { DB_KEY_CURRENT_ID, DB_KEY_GACHA_DATA } from "#/mihoyo-gacha/util/constants";
+import { DB_KEY_CURRENT_ID, DB_KEY_GACHA_DATA, ERROR_MESSAGES } from "#/mihoyo-gacha/util/constants";
 import { GachaClientFactory } from "#/mihoyo-gacha/module/client-factory";
 import { parseGameType } from "#/mihoyo-gacha/util/game-configs";
 import { UIGFConverter } from "#/mihoyo-gacha/util/uigf-converter";
+import { isPrivateMessage } from "@/modules/message";
+import { FileRecepElem, ReplyRecepElem } from "@/modules/lib";
 
 /**
  * 从UIGF v4.0 JSON文件导入抽卡记录
@@ -84,8 +86,9 @@ async function importFromUIGF_v4_Json( fileUrl: string, gameType: GameType, {
 				uid: uid
 			};
 			
+			// 对绝区零的键特殊处理
 			const dbKey = generateRedisKey( DB_KEY_GACHA_DATA, {
-				gacha_type: gachaData.gacha_type,
+				gacha_type: gameType === GameType.ZZZ ? UIGFConverter.mapZzzGachaType( gachaData.gacha_type ) : gachaData.gacha_type,
 				uid: uid,
 				prefix: gameConfig.redisPrefix
 			} );
@@ -150,10 +153,10 @@ async function importFromExcel( fileUrl: string, gameType: GameType, {
 		const uidIndex = headers.indexOf( 'uid' );
 		const langIndex = headers.indexOf( 'lang' );
 		
-		originSheet.eachRow( { includeEmpty: false }, ( row, rowNumber ) => {
+		originSheet.eachRow( { includeEmpty: false }, ( row: string[], rowNumber: number ) => {
 			if ( rowNumber === 1 ) return; // 跳过标题行
 			
-			const rowData = row.values as any[];
+			const rowData = row.values;
 			if ( uidIndex > 0 ) uid = rowData[uidIndex];
 			const lang = langIndex > 0 ? rowData[langIndex] : 'zh-cn';
 			
@@ -175,7 +178,7 @@ async function importFromExcel( fileUrl: string, gameType: GameType, {
 				};
 				
 				const dbKey = generateRedisKey( DB_KEY_GACHA_DATA, {
-					gacha_type: gachaData.gacha_type,
+					gacha_type: gameType === GameType.ZZZ ? UIGFConverter.mapZzzGachaType( gachaData.gacha_type ) : gachaData.gacha_type,
 					uid,
 					prefix: gameConfig.redisPrefix
 				} );
@@ -209,12 +212,42 @@ async function importFromExcel( fileUrl: string, gameType: GameType, {
 	}
 }
 
+async function getFileUrl( input: InputParameter ): Promise<string> {
+	const { messageData, client, logger } = input;
+	const replyMessage = messageData.message.find( value => value.type === "reply" ) as ReplyRecepElem;
+	const messageId = replyMessage.data.id;
+	const { status, wording, data } = await client.getMessage( Number.parseInt( messageId ) );
+	if ( status != 'ok' ) {
+		logger.error( `[导入抽卡记录] 获取文件链接失败: `, wording );
+		throw ERROR_MESSAGES.NOT_FOUND_FILE;
+	}
+	const fileMessage = data.message.find( item => item.type === 'file' ) as FileRecepElem;
+	const fileId = fileMessage?.data?.file_id;
+	if ( !fileId ) {
+		logger.error( `[导入抽卡记录] 获取文件链接失败: `, data );
+		throw ERROR_MESSAGES.NOT_FOUND_FILE;
+	}
+	
+	const response = isPrivateMessage( messageData ) ?
+		await client.getPrivateFileUrl( messageData.user_id, fileId ) :
+		await client.getGroupFileUrl( messageData.group_id, fileId );
+	if ( response.status !== 'ok' ) {
+		throw new Error( response.wording );
+	}
+	const url = response.data?.url;
+	if ( !url ) {
+		logger.error( `[导入抽卡记录] 获取文件链接失败: `, response.data );
+		throw ERROR_MESSAGES.NOT_FOUND_FILE;
+	}
+	return url;
+}
+
 export default defineDirective( "order", async ( input ) => {
 	const { sendMessage, logger, matchResult } = input;
 	
 	const gameTypeStr = matchResult.match[0];
 	const importType = matchResult.match[1];
-	const fileUrl = matchResult.match[2];
+	let fileUrl = matchResult.match[2];
 	const gameType = parseGameType( gameTypeStr );
 	
 	// 获取游戏配置
@@ -223,8 +256,7 @@ export default defineDirective( "order", async ( input ) => {
 	
 	// 检查是否提供了文件URL
 	if ( !fileUrl ) {
-		await sendMessage( `请提供${ gameConfig.name }抽卡记录文件的URL地址。` );
-		return;
+		fileUrl = await getFileUrl( input );
 	}
 	
 	try {

@@ -283,6 +283,20 @@ export class UIGFConverter {
 	}
 	
 	/**
+	 * 映射绝区零抽卡类型
+	 */
+	static mapZzzGachaType( gachaType: string ): string {
+		// 绝区零的real_gacha_type映射到gacha_type
+		const mapping: Record<string, string> = {
+			"1": "1001", // 常驻频段
+			"2": "2001", // 独家频段
+			"3": "3001", // 音擎频段
+			"5": "5001"  // 邦布频段
+		};
+		return mapping[gachaType] || gachaType;
+	}
+	
+	/**
 	 * 验证原神数据格式
 	 */
 	private static validateGenshinData( accounts: any[], errors: string[] ) {

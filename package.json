@@ -3,7 +3,7 @@
   "author" : "Bennett",
   "private" : true,
   "license" : "MIT",
-  "version" : "1.0.0",
+  "version" : "1.1.0",
   "description" : "这是一个基于 SilveryStar/Adachi-BOT 应用于 QQ 的miHoYo抽卡分析插件。",
   "dependencies" : {
     "exceljs" : "^4.4.0",

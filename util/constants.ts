@@ -21,7 +21,8 @@ export const ERROR_MESSAGES = {
 	INVALID_URL: "未匹配到可用的URL",
 	URL_GENERATION_FAILED: "链接生成失败",
 	DATA_LOAD_FAILED: "加载数据失败",
-	RENDER_FAILED: "图片渲染失败，请重试。"
+	RENDER_FAILED: "图片渲染失败，请重试。",
+	NOT_FOUND_FILE: "未找到引用的文件"
 } as const;
 
 // 版本号常量

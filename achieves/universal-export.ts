@@ -45,7 +45,7 @@ async function sendExportResult( url: string, gameName: string, { logger, sendMe
  * 导出为UIGF v4.0 JSON格式
  */
 async function exportToUIGF_v4_JSON( exportData: UIGF_v4, gameConfig: GameConfig, i: InputParameter ) {
-	const { file, sendMessage, messageData, redis, logger, auth } = i;
+	const { file, sendMessage, logger } = i;
 	const json = JSON.stringify( exportData, null, 2 );
 	
 	// 生成文件名：UIGF-{游戏类型}-{UID}-{时间戳}.json
@@ -143,7 +143,7 @@ export default defineDirective( "order", async ( input ) => {
 		serviceId = matchResult.match[2];
 	}
 	const gameType = parseGameType( gameTypeStr );
-	const { sender: { user_id }, raw_message } = messageData;
+	const { sender: { user_id } } = messageData;
 	
 	// 获取游戏配置
 	const client = GachaClientFactory.createClient( gameType );

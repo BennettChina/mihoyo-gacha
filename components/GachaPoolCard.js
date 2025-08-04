@@ -61,14 +61,12 @@ export const GachaPoolCard = {
 		
 		// 获取抽数样式类
 		const getItemCountClass = ( count ) => {
-			if ( count <= 10 ) {
-				return 'count-veryhigh'; // 超欧
-			} else if ( count <= 30 ) {
-				return 'count-high'; // 欧皇
+			if ( count <= 30 ) {
+				return 'count-low'; // 欧皇
 			} else if ( count <= 60 ) {
 				return 'count-mid'; // 普通
 			} else {
-				return 'count-low'; // 非酋
+				return 'count-high'; // 非酋
 			}
 		};
 		

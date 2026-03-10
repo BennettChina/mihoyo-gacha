@@ -329,6 +329,8 @@ export interface GameConfig {
 	};
 	/** 抽卡类型定义 */
 	gachaTypes: Record<string, string>;
+	/** gachaType 与 realGachaType 映射转换 */
+	realGachaTypeMap?: Record<string, string>;
 	sortedGachaTypes: string[];
 	/** 默认抽卡池配置 */
 	defaultGachaConfig: {
@@ -353,7 +355,7 @@ export interface GameConfig {
 		character: string[]; // 角色池
 		weapon: string[]; // 武器池
 		permanent: string; // 常驻池
-		beginner: string; // 新手池
+		beginner?: string; // 新手池
 		special?: string[]; // 特殊池
 	}
 }

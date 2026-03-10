@@ -34,9 +34,19 @@ export const ZZZ_CONFIG: GameConfig = {
 		"2001": "独家频段",
 		"3001": "音擎频段",
 		"1001": "常驻频段",
-		"5001": "邦布频段"
+		"5001": "邦布频段",
+		"12001": "独家重映",
+		"13001": "音擎回响"
 	},
-	sortedGachaTypes: [ '2001', '3001', '1001', '5001' ],
+	realGachaTypeMap: {
+		"2001": "2",
+		"3001": "3",
+		"1001": "1",
+		"5001": "5",
+		"12001": "102",
+		"13001": "103"
+	},
+	sortedGachaTypes: [ '2001', '3001', '12001', '13001', '1001', '5001' ],
 	defaultGachaConfig: {
 		gachaId: "2c1f5692fdfbb733a08733f9eb69d32aed1d37",
 		gachaType: "2001"
@@ -54,10 +64,10 @@ export const ZZZ_CONFIG: GameConfig = {
 		assistant: "邦布"
 	},
 	gachaType: {
-		character: [ "2001" ],
-		weapon: [ "3001" ],
+		character: [ "2001", "12001" ],
+		weapon: [ "3001", "13001" ],
 		permanent: "1001",
-		beginner: "5001"
+		special: [ "5001" ]
 	}
 };
 

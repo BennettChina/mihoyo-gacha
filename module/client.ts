@@ -527,6 +527,7 @@ export class UniversalGachaClient implements IGachaClient {
 	public async loadData( url: string, userId: number ): Promise<void> {
 		const { gameConfig } = this.config;
 		const gachaTypes = Object.keys( gameConfig.gachaTypes );
+		const realGachaTypeMap = gameConfig.realGachaTypeMap;
 		const urlObj = new URL( htmlDecode( url ) );
 		let page = 1;
 		const size = 20;
@@ -551,7 +552,9 @@ export class UniversalGachaClient implements IGachaClient {
 				params.set( "size", `${ size }` );
 				params.set( "end_id", gachaId );
 				params.set( "gacha_type", gachaType );
-				params.set( "real_gacha_type", gachaType[0] );
+				if ( realGachaTypeMap ) {
+					params.set( "real_gacha_type", realGachaTypeMap[gachaType] );
+				}
 				
 				// 设置game_biz参数
 				if ( !params.has( "game_biz" ) ) {

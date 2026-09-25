@@ -16,7 +16,7 @@ export const GachaPoolCard = {
 		},
 		title: {
 			type: String,
-			default: '抽卡池分布'
+			default: '祈愿履历'
 		}
 	},
 	emits: [ 'item-click' ],
@@ -40,8 +40,22 @@ export const GachaPoolCard = {
 		
 		// 计算物品缩略图地址
 		const getItemImage = ( url ) => {
+			if ( !url ) return '';
+			if ( url.includes( '?' ) ) return url;
 			return `${ url }?x-oss-process=image/quality,q_75/resize,s_278/format,webp`;
 		};
+		
+		const getRealItemCount = ( pool ) => {
+			return pool.items.filter( item => item.name !== '?' ).length;
+		};
+		
+		const historySummary = computed( () => {
+			return props.gachaPools.reduce( ( result, pool ) => {
+				result.items += getRealItemCount( pool );
+				result.pulls += pool.count || 0;
+				return result;
+			}, { items: 0, pulls: 0 } );
+		} );
 		
 		// 获取物品样式类
 		const getItemClass = ( item ) => {
@@ -80,24 +94,34 @@ export const GachaPoolCard = {
 			getItemClass,
 			getItemCountClass,
 			onItemClick,
-			getItemImage
+			getItemImage,
+			getRealItemCount,
+			historySummary
 		};
 	},
 	template: `
     <div class="gacha-pool-card" :style="cssVariables">
+      <div class="history-header">
+        <div class="panel-heading history-heading">
+          <span class="panel-icon">✦</span>
+          <span class="panel-title">{{ title }}</span>
+        </div>
+        <div class="history-summary">{{ historySummary.items }} 个 / {{ historySummary.pulls }} 抽</div>
+      </div>
       <div class="pool-flex">
         <template v-for="pool in gachaPools" :key="pool.type">
-	        <div v-if="pool.items.length">
+	        <section v-if="pool.items.length" class="pool-section">
 	          <div class="pool-block">
-	          	<span>{{ pool.name }}</span>
-	          	<span>{{ pool.items.length -1 }}（个）/{{ pool.count }}（总抽数）</span>
-			  </div>
+	            <span class="pool-name">{{ pool.name }}</span>
+	            <span class="pool-count">{{ getRealItemCount(pool) }} 个 / {{ pool.count }} 抽</span>
+	          </div>
 	          <div class="pool-items">
 	            <div
-	              v-for="item in pool.items"
-	              :key="pool.type + '-' + item.name"
+	              v-for="(item, index) in pool.items"
+	              :key="pool.type + '-' + index + '-' + item.id"
 	              :class="getItemClass(item)"
 	              :data-count="item.count"
+	              :title="item.name + '：' + item.count + ' 抽'"
 	              @click="onItemClick(item)"
 	            >
 	              <div class="avatar-container"><img src="../assets/images/question-mark.png" :alt="item.name" v-if="item.name === '?'">
@@ -108,7 +132,7 @@ export const GachaPoolCard = {
 	              <div v-if="item.isCrooked" class="crooked">歪</div>
 	            </div>
 	          </div>
-	        </div>
+	        </section>
 		</template>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { UserInfoCard } from './UserInfoCard.js';
 import { AnalysisCard } from './AnalysisCard.js';
 import { GachaPoolCard } from './GachaPoolCard.js';
 import { GachaChart } from './GachaChart.js';
+import { AchievementCard } from './AchievementCard.js';
 
 export const GachaAnalysis = {
 	name: 'GachaAnalysis',
@@ -14,7 +15,8 @@ export const GachaAnalysis = {
 		UserInfoCard,
 		AnalysisCard,
 		GachaPoolCard,
-		GachaChart
+		GachaChart,
+		AchievementCard
 	},
 	setup() {
 		const { reactive, computed, onMounted } = Vue;
@@ -48,7 +50,8 @@ export const GachaAnalysis = {
 						permanent: [ '#eaffb5', '#baff7b' ],
 						special: [ '#9b59b6', '#8e44ad' ]
 					},
-					userBackground: 'url("/mihoyo-gacha/assets/images/user-zzz-bg.png") center center no-repeat',
+					userBackground: 'url("/mihoyo-gacha/assets/images/user-zzz-bg.webp") center center no-repeat',
+					userBackgroundColor: '#202020',
 					gachaBackground: '#292a31',
 					appBackground: "#23242a url('https://baike.mihoyo.com/zzz/wiki/pc-page-bg.png') repeat"
 				},
@@ -68,7 +71,8 @@ export const GachaAnalysis = {
 						permanent: [ '#a8e6cf', '#7fcdcd' ],
 						special: [ '#ffd93d', '#6bcf7f' ]
 					},
-					userBackground: 'url("/mihoyo-gacha/assets/images/user-sr-bg.png") center center no-repeat',
+					userBackground: 'url("/mihoyo-gacha/assets/images/user-sr-bg.webp") center center no-repeat',
+					userBackgroundColor: '#38569F',
 					gachaBackground: '#16213e',
 					appBackground: '#1a1a2e'
 				},
@@ -88,7 +92,8 @@ export const GachaAnalysis = {
 						permanent: [ '#27ae60', '#2ecc71' ],
 						special: [ '#9b59b6', '#8e44ad' ]
 					},
-					userBackground: 'url("/mihoyo-gacha/assets/images/user-genshin-bg.png") no-repeat center center',
+					userBackground: 'url("/mihoyo-gacha/assets/images/user-genshin-bg.webp") no-repeat center center',
+					userBackgroundColor: '#836855',
 					gachaBackground: '#FAF9F5',
 					appBackground: '#f5f2e9'
 				}
@@ -100,6 +105,11 @@ export const GachaAnalysis = {
 		const params = getURLParams();
 		const gameType = params.game;
 		const theme = getGameTheme( gameType );
+		const historyTitle = computed( () => ( {
+			genshin: '祈愿履历',
+			sr: '跃迁履历',
+			zzz: '频段履历'
+		}[gameType] || '抽卡履历' ) );
 		
 		const state = reactive( {
 			loading: true,
@@ -174,6 +184,7 @@ export const GachaAnalysis = {
 			state,
 			theme,
 			gameType,
+			historyTitle,
 			cssVariables,
 			retry,
 			onPoolItemClick,
@@ -183,36 +194,39 @@ export const GachaAnalysis = {
 	},
 	template: `
     <div id="app" v-if="state.data" :style="cssVariables">
-	   <div class="flex-row">
-	        <div>
-		        <UserInfoCard
-		          v-if="state.data.userInfo"
-		          :user-info="state.data.userInfo"
-		          :theme="theme"
-		        />
-		        
-		        <AnalysisCard
-		          v-if="state.data.analysisData"
-		          :analysis-data="state.data.analysisData"
-		          :theme="theme"
-		          :game-type="gameType"
-		          :title="theme.name + '抽卡分析'"
-		        />
-		        <GachaChart
-		          :key="state.data.chartData.title"
-		          v-if="state.data.chartData && state.data.chartData.data.length > 0"
-		          :chart-data="state.data.chartData"
-		          :theme="theme"
-		        />
-			</div>
-			<GachaPoolCard
-			          v-if="state.data.gachaPools && state.data.gachaPools.length > 0"
-			          :gacha-pools="state.data.gachaPools"
-			          :theme="theme"
-			          :title="theme.name + '抽卡池分布'"
-			          @item-click="onPoolItemClick"
-			        />
-		</div>
-      </div>
+      <UserInfoCard
+        v-if="state.data.userInfo"
+        :user-info="state.data.userInfo"
+        :theme="theme"
+      />
+
+      <main class="dashboard-grid">
+        <AnalysisCard
+          v-if="state.data.analysisData"
+          :analysis-data="state.data.analysisData"
+          :theme="theme"
+          :game-type="gameType"
+        />
+        <GachaChart
+          :key="state.data.chartData.title"
+          v-if="state.data.chartData && state.data.chartData.data.length > 0"
+          :chart-data="state.data.chartData"
+          :theme="theme"
+        />
+        <AchievementCard
+          v-if="state.data.analysisData"
+          :achievements="state.data.analysisData.achievement"
+          :theme="theme"
+        />
+      </main>
+
+      <GachaPoolCard
+        v-if="state.data.gachaPools && state.data.gachaPools.length > 0"
+        :gacha-pools="state.data.gachaPools"
+        :theme="theme"
+        :title="historyTitle"
+        @item-click="onPoolItemClick"
+      />
+    </div>
   `
 };

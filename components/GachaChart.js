@@ -45,21 +45,23 @@ export const GachaChart = {
 		// 生成ECharts配置
 		const getChartOption = computed( () => {
 			const { data, options = {} } = props.chartData;
+			const textColor = props.theme.textColor;
+			const gridColor = props.theme.borderColor;
 			// 配置图表选项
 			return {
-				title: {
-					text: '近期抽卡走势',
-					left: 'center',
-					textStyle: {
-						color: 'rgba(75, 192, 192, 1)'
-					}
-				},
 				xAxis: {
 					type: 'category',
 					data: data.map( item => item.label ),
 					axisLabel: {
 						interval: 0,
-						rotate: 30
+						rotate: 30,
+						color: textColor,
+						fontSize: 10
+					},
+					axisLine: {
+						lineStyle: {
+							color: gridColor
+						}
 					},
 					splitLine: {
 						show: true,
@@ -73,6 +75,16 @@ export const GachaChart = {
 					type: 'value',
 					min: 0,
 					interval: 10,
+					axisLabel: {
+						color: textColor,
+						fontSize: 10
+					},
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: gridColor
+						}
+					},
 					splitLine: {
 						show: true,
 						lineStyle: {
@@ -85,20 +97,22 @@ export const GachaChart = {
 					type: 'line',
 					data: data.map( item => item.value ),
 					itemStyle: {
-						color: 'rgba(75, 192, 192, 1)'
+						color: '#35aaa9'
 					},
 					areaStyle: {
-						color: 'rgba(75, 192, 192, 0.2)'
+						color: 'rgba(53, 170, 169, 0.12)'
 					},
 					lineStyle: {
 						width: 2,
-						color: 'rgba(75, 192, 192, 1)'
+						color: '#35aaa9'
 					},
 					smooth: true,
 					label: {
 						show: true,
 						position: 'top',
-						color: 'rgba(75, 192, 192, 1)'
+						color: '#35aaa9',
+						fontSize: 10,
+						fontWeight: 600
 					}
 				} ],
 				tooltip: {
@@ -108,12 +122,13 @@ export const GachaChart = {
 					}
 				},
 				grid: {
-					left: '3%',
-					right: '4%',
-					bottom: '10%',
-					top: '10%',
+					left: '1%',
+					right: '2%',
+					bottom: '8%',
+					top: '8%',
 					containLabel: true
 				},
+				animationDuration: 500,
 				...options
 			};
 		} );
@@ -124,6 +139,12 @@ export const GachaChart = {
 		};
 	},
 	template: `
-      <v-chart class="chart-container" :option="getChartOption" autoresize :style="cssVariables" />
+      <div class="chart-card" :style="cssVariables">
+        <div class="panel-heading">
+          <span class="panel-icon">⌁</span>
+          <span class="panel-title">近期抽卡走势</span>
+        </div>
+        <v-chart class="chart-container" :option="getChartOption" autoresize />
+      </div>
   `
 };

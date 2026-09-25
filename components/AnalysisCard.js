@@ -20,7 +20,7 @@ export const AnalysisCard = {
 		},
 		title: {
 			type: String,
-			default: '抽卡分析'
+			default: '抽卡概况'
 		}
 	},
 	setup( props ) {
@@ -64,32 +64,17 @@ export const AnalysisCard = {
 			return labels[props.gameType] || labels.zzz;
 		} );
 		
-		// 成就评价样式类
-		const achievementClass = ( item ) => {
-			if ( !item ) return "";
-			if ( [ '2A级景区', '3A级景区' ].includes( item ) ) {
-				return 'eval-normal';
-			}
-			if ( item.includes( '连不歪' ) || item.includes( '黄蛋' ) || item.includes( 'A级景区' ) ) {
-				return 'eval-excellent';
-			}
-			if ( [ '一发入魂', '欧皇时刻' ].includes( item ) ) {
-				return 'eval-excellent';
-			}
-			if ( item.includes( '连大保底' ) || [ '非酋竟是我自己' ].includes( item ) ) {
-				return 'eval-poor';
-			}
-			return 'eval-normal';
-		};
-		
 		return {
 			cssVariables,
-			gameLabels,
-			achievementClass
+			gameLabels
 		};
 	},
 	template: `
     <div class="analysis-card" :style="cssVariables">
+      <div class="panel-heading">
+        <span class="panel-icon">◎</span>
+        <span class="panel-title">{{ title }}</span>
+      </div>
       <div class="analysis-data">
         <div class="analysis-row">
           <div class="analysis-item">
@@ -133,10 +118,6 @@ export const AnalysisCard = {
             <div class="item-label">最钟爱你的TA</div>
           </div>
         </div>
-      </div>
-      <div class="achievement-eval">
-        <span class="eval-label">成就评价：</span>
-        <div class="eval-result-box"><span class="eval-result" :class="achievementClass(item)" v-for="item in analysisData.achievement" :key="item">{{ item }}</span></div>
       </div>
     </div>
   `

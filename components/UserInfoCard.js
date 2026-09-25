@@ -31,7 +31,8 @@ export const UserInfoCard = {
 				'--border-color': theme.borderColor,
 				'--gradient-special-start': theme.gradients.special[0],
 				'--gradient-special-end': theme.gradients.special[1],
-				'--user-background-image': theme.userBackground
+				'--user-background-image': theme.userBackground,
+				'--user-background-color': theme.userBackgroundColor
 			};
 		} );
 		
@@ -42,7 +43,7 @@ export const UserInfoCard = {
 	template: `
     <div class="user-info-card" :style="cssVariables">
       <div class="user-avatar">
-        <img :src="userInfo.avatar || 'https://bbs-static.miyoushe.com/avatar/avatar1.png'" :alt="userInfo.name + '的头像'" />
+        <img :src="userInfo.avatar || 'https://bbs-static.miyoushe.com/avatar/avatar1.png'" :alt="userInfo.nickname + '的头像'" />
       </div>
       <div class="user-basic">
         <div class="user-name">{{ userInfo.nickname || '未知用户' }}</div>

@@ -46,7 +46,10 @@ export const GachaChart = {
 		const getChartOption = computed( () => {
 			const { data, options = {} } = props.chartData;
 			const textColor = props.theme.textColor;
-			const gridColor = props.theme.borderColor;
+			const overviewTextColor = props.theme.overviewPanelText || textColor;
+			const gridColor = props.theme.chartGridColor || 'rgba(72, 170, 163, 0.17)';
+			const chartColor = props.theme.chartColor || '#48AAA3';
+			const chartAreaColor = props.theme.chartAreaColor || 'rgba(72, 170, 163, 0.10)';
 			// 配置图表选项
 			return {
 				xAxis: {
@@ -55,18 +58,18 @@ export const GachaChart = {
 					axisLabel: {
 						interval: 0,
 						rotate: 30,
-						color: textColor,
+						color: overviewTextColor,
 						fontSize: 10
 					},
 					axisLine: {
 						lineStyle: {
-							color: gridColor
+							color: props.theme.overviewPanelDivider || props.theme.borderColor
 						}
 					},
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: 'rgba(75, 192, 192, 0.2)'
+							color: gridColor
 						}
 					},
 					boundaryGap: false
@@ -76,19 +79,19 @@ export const GachaChart = {
 					min: 0,
 					interval: 10,
 					axisLabel: {
-						color: textColor,
+						color: overviewTextColor,
 						fontSize: 10
 					},
 					axisLine: {
 						show: true,
 						lineStyle: {
-							color: gridColor
+							color: props.theme.overviewPanelDivider || props.theme.borderColor
 						}
 					},
 					splitLine: {
 						show: true,
 						lineStyle: {
-							color: 'rgba(75, 192, 192, 0.2)'
+							color: gridColor
 						}
 					}
 				},
@@ -97,20 +100,20 @@ export const GachaChart = {
 					type: 'line',
 					data: data.map( item => item.value ),
 					itemStyle: {
-						color: '#35aaa9'
+						color: chartColor
 					},
 					areaStyle: {
-						color: 'rgba(53, 170, 169, 0.12)'
+						color: chartAreaColor
 					},
 					lineStyle: {
 						width: 2,
-						color: '#35aaa9'
+						color: chartColor
 					},
 					smooth: true,
 					label: {
 						show: true,
 						position: 'top',
-						color: '#35aaa9',
+						color: chartColor,
 						fontSize: 10,
 						fontWeight: 600
 					}

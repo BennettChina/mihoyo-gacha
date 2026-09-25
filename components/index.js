@@ -53,7 +53,33 @@ export const GachaAnalysis = {
 					userBackground: 'url("/mihoyo-gacha/assets/images/user-zzz-bg.webp") center center no-repeat',
 					userBackgroundColor: '#202020',
 					gachaBackground: '#292a31',
-					appBackground: "#23242a url('https://baike.mihoyo.com/zzz/wiki/pc-page-bg.png') repeat"
+					appBackground: "#23242a url('https://baike.mihoyo.com/zzz/wiki/pc-page-bg.png') repeat",
+					overviewAnalysisBackground: 'linear-gradient(180deg, #FFDE00 0%, #F4D400 100%)',
+					overviewAnalysisBorder: '#FFDE00',
+					overviewAnalysisText: '#23242A',
+					overviewAnalysisMuted: '#5B542A',
+					overviewAnalysisDivider: 'rgba(35, 36, 42, 0.18)',
+					overviewAnalysisAccent: '#8A6E00',
+					overviewPanelBackground: '#202126',
+					overviewPanelBorder: '#474950',
+					overviewPanelDivider: '#3E4047',
+					overviewPanelText: '#F7F3E8',
+					overviewPanelMuted: '#B9B5A9',
+					overviewPanelAccent: '#FFDE00',
+					overviewStatBackground: 'rgba(255, 255, 255, 0.42)',
+					overviewStatBorder: 'rgba(35, 36, 42, 0.22)',
+					chartColor: '#FFDE00',
+					chartAreaColor: 'rgba(255, 222, 0, 0.12)',
+					chartGridColor: 'rgba(255, 222, 0, 0.16)',
+					evalExcellentBackground: 'rgba(198, 226, 128, 0.16)',
+					evalExcellentBorder: 'rgba(198, 226, 128, 0.34)',
+					evalExcellentText: '#D9E8AE',
+					evalNormalBackground: 'rgba(189, 190, 198, 0.12)',
+					evalNormalBorder: 'rgba(189, 190, 198, 0.28)',
+					evalNormalText: '#D6D4CF',
+					evalPoorBackground: 'rgba(255, 154, 107, 0.16)',
+					evalPoorBorder: 'rgba(255, 154, 107, 0.34)',
+					evalPoorText: '#FFC09D'
 				},
 				sr: {
 					name: '崩坏：星穹铁道',
@@ -74,7 +100,33 @@ export const GachaAnalysis = {
 					userBackground: 'url("/mihoyo-gacha/assets/images/user-sr-bg.webp") center center no-repeat',
 					userBackgroundColor: '#38569F',
 					gachaBackground: '#16213e',
-					appBackground: '#1a1a2e'
+					appBackground: '#1a1a2e',
+					overviewAnalysisBackground: 'linear-gradient(180deg, #4A90E2 0%, #3C7FD0 100%)',
+					overviewAnalysisBorder: '#4A90E2',
+					overviewAnalysisText: '#FFFFFF',
+					overviewAnalysisMuted: '#DCEBFF',
+					overviewAnalysisDivider: 'rgba(255, 255, 255, 0.22)',
+					overviewAnalysisAccent: '#DCEEFF',
+					overviewPanelBackground: '#172138',
+					overviewPanelBorder: '#3C4F73',
+					overviewPanelDivider: '#30405F',
+					overviewPanelText: '#F2F6FF',
+					overviewPanelMuted: '#A9B9D6',
+					overviewPanelAccent: '#7BB3F0',
+					overviewStatBackground: 'rgba(255, 255, 255, 0.13)',
+					overviewStatBorder: 'rgba(255, 255, 255, 0.28)',
+					chartColor: '#58D6E8',
+					chartAreaColor: 'rgba(88, 214, 232, 0.12)',
+					chartGridColor: 'rgba(88, 214, 232, 0.16)',
+					evalExcellentBackground: 'rgba(104, 211, 157, 0.16)',
+					evalExcellentBorder: 'rgba(104, 211, 157, 0.34)',
+					evalExcellentText: '#9CE5C0',
+					evalNormalBackground: 'rgba(133, 155, 190, 0.14)',
+					evalNormalBorder: 'rgba(133, 155, 190, 0.32)',
+					evalNormalText: '#C7D4E8',
+					evalPoorBackground: 'rgba(255, 153, 102, 0.16)',
+					evalPoorBorder: 'rgba(255, 153, 102, 0.34)',
+					evalPoorText: '#FFC49F'
 				},
 				genshin: {
 					name: '原神',
@@ -95,7 +147,33 @@ export const GachaAnalysis = {
 					userBackground: 'url("/mihoyo-gacha/assets/images/user-genshin-bg.webp") no-repeat center center',
 					userBackgroundColor: '#836855',
 					gachaBackground: '#FAF9F5',
-					appBackground: '#f5f2e9'
+					appBackground: '#f5f2e9',
+					overviewAnalysisBackground: 'linear-gradient(135deg, #FBF8F0 0%, #EEE5D2 100%)',
+					overviewAnalysisBorder: '#D0BE9D',
+					overviewAnalysisText: '#5C5145',
+					overviewAnalysisMuted: '#7D7265',
+					overviewAnalysisDivider: '#DED5C5',
+					overviewAnalysisAccent: '#B49667',
+					overviewPanelBackground: '#F5F2EB',
+					overviewPanelBorder: '#D8CEBD',
+					overviewPanelDivider: '#DED5C5',
+					overviewPanelText: '#5C5145',
+					overviewPanelMuted: '#7D7265',
+					overviewPanelAccent: '#B49667',
+					overviewStatBackground: '#FBFAF6',
+					overviewStatBorder: '#E2DACD',
+					chartColor: '#48AAA3',
+					chartAreaColor: 'rgba(72, 170, 163, 0.10)',
+					chartGridColor: 'rgba(72, 170, 163, 0.17)',
+					evalExcellentBackground: '#E6F0D7',
+					evalExcellentBorder: '#CEDCAE',
+					evalExcellentText: '#56633F',
+					evalNormalBackground: '#F0ECE4',
+					evalNormalBorder: '#DDD5C7',
+					evalNormalText: '#665F55',
+					evalPoorBackground: '#F6DFCA',
+					evalPoorBorder: '#EAC2A1',
+					evalPoorText: '#875333'
 				}
 			};
 			return themes[gameType] || themes.zzz;
@@ -128,7 +206,30 @@ export const GachaAnalysis = {
 			'--card-background-color': theme.cardBackgroundColor,
 			'--text-color': theme.textColor,
 			'--border-color': theme.borderColor,
-			'--app-background': theme.appBackground
+			'--app-background': theme.appBackground,
+			'--overview-analysis-background': theme.overviewAnalysisBackground,
+			'--overview-analysis-border': theme.overviewAnalysisBorder,
+			'--overview-analysis-text': theme.overviewAnalysisText,
+			'--overview-analysis-muted': theme.overviewAnalysisMuted,
+			'--overview-analysis-divider': theme.overviewAnalysisDivider,
+			'--overview-analysis-accent': theme.overviewAnalysisAccent,
+			'--overview-panel-background': theme.overviewPanelBackground,
+			'--overview-panel-border': theme.overviewPanelBorder,
+			'--overview-panel-divider': theme.overviewPanelDivider,
+			'--overview-panel-text': theme.overviewPanelText,
+			'--overview-panel-muted': theme.overviewPanelMuted,
+			'--overview-panel-accent': theme.overviewPanelAccent,
+			'--overview-stat-background': theme.overviewStatBackground,
+			'--overview-stat-border': theme.overviewStatBorder,
+			'--eval-excellent-background': theme.evalExcellentBackground,
+			'--eval-excellent-border': theme.evalExcellentBorder,
+			'--eval-excellent-text': theme.evalExcellentText,
+			'--eval-normal-background': theme.evalNormalBackground,
+			'--eval-normal-border': theme.evalNormalBorder,
+			'--eval-normal-text': theme.evalNormalText,
+			'--eval-poor-background': theme.evalPoorBackground,
+			'--eval-poor-border': theme.evalPoorBorder,
+			'--eval-poor-text': theme.evalPoorText
 		} ) );
 		
 		// 模拟数据加载
@@ -207,17 +308,19 @@ export const GachaAnalysis = {
           :theme="theme"
           :game-type="gameType"
         />
-        <GachaChart
-          :key="state.data.chartData.title"
-          v-if="state.data.chartData && state.data.chartData.data.length > 0"
-          :chart-data="state.data.chartData"
-          :theme="theme"
-        />
-        <AchievementCard
-          v-if="state.data.analysisData"
-          :achievements="state.data.analysisData.achievement"
-          :theme="theme"
-        />
+        <div class="overview-secondary-panel">
+          <GachaChart
+            :key="state.data.chartData.title"
+            v-if="state.data.chartData && state.data.chartData.data.length > 0"
+            :chart-data="state.data.chartData"
+            :theme="theme"
+          />
+          <AchievementCard
+            v-if="state.data.analysisData"
+            :achievements="state.data.analysisData.achievement"
+            :theme="theme"
+          />
+        </div>
       </main>
 
       <GachaPoolCard

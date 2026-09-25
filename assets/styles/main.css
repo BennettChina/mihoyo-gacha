@@ -51,7 +51,7 @@ body {
 }
 
 .panel-icon {
-	color: #aa8860;
+	color: var(--overview-panel-accent, #aa8860);
 	font-size: 18px;
 	line-height: 1;
 }
@@ -61,6 +61,11 @@ body {
 	font-weight: 700;
 	line-height: 1.2;
 	letter-spacing: 0.5px;
+}
+
+.dashboard-grid .panel-heading {
+	color: var(--overview-panel-text);
+	border-bottom-color: var(--overview-panel-divider);
 }
 
 /* 游戏主题样式 */
@@ -159,15 +164,24 @@ body {
 /* 顶部三栏布局 */
 .dashboard-grid {
 	display: grid;
-	grid-template-columns: minmax(250px, 1.02fr) minmax(360px, 1.42fr) minmax(190px, 0.76fr);
+	grid-template-columns: minmax(300px, 1fr) minmax(520px, 1.65fr);
 	gap: 14px;
 	align-items: stretch;
 	margin-bottom: 14px;
 }
 
+.overview-secondary-panel {
+	display: grid;
+	grid-template-columns: minmax(360px, 1.65fr) minmax(180px, 0.78fr);
+	min-width: 0;
+	overflow: hidden;
+	background: var(--overview-panel-background);
+	border: 1px solid var(--overview-panel-border);
+	border-radius: 10px;
+	box-shadow: 0 3px 14px rgba(46, 42, 35, 0.12);
+}
+
 .analysis-card,
-.chart-card,
-.achievement-card,
 .gacha-pool-card {
 	min-width: 0;
 	background: var(--card-background-color);
@@ -180,23 +194,34 @@ body {
 .analysis-card {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
-	background: linear-gradient(180deg, var(--primary-color) 90%, rgba(255, 251, 230, 0.1) 100%);
-	border-color: var(--primary-color);
+	padding: 16px 18px 18px;
+	background: var(--overview-analysis-background);
+	border: 1px solid var(--overview-analysis-border);
+	border-radius: 10px;
+	box-shadow: 0 3px 14px rgba(46, 42, 35, 0.12);
+}
+
+.analysis-card .panel-heading {
+	color: var(--overview-analysis-text);
+	border-bottom-color: var(--overview-analysis-divider);
+}
+
+.analysis-card .panel-icon {
+	color: var(--overview-analysis-accent);
 }
 
 .analysis-data {
 	display: grid;
 	flex: 1;
 	grid-template-rows: repeat(3, minmax(0, 1fr));
-	gap: 8px;
+	gap: 10px;
 	margin-top: 12px;
 }
 
 .analysis-row {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 8px;
+	gap: 10px;
 }
 
 .analysis-item {
@@ -205,10 +230,10 @@ body {
 	align-items: center;
 	justify-content: center;
 	min-width: 0;
-	min-height: 60px;
-	padding: 7px 5px;
-	background: rgba(255, 255, 255, 0.5);
-	border: 1px solid color-mix(in srgb, var(--border-color) 55%, transparent);
+	min-height: 62px;
+	padding: 8px 6px;
+	background: var(--overview-stat-background);
+	border: 1px solid var(--overview-stat-border);
 	border-radius: 8px;
 }
 
@@ -216,8 +241,8 @@ body {
 	max-width: 100%;
 	margin-bottom: 3px;
 	overflow: hidden;
-	color: var(--text-color);
-	font-size: 18px;
+	color: var(--overview-analysis-text);
+	font-size: 20px;
 	font-weight: 700;
 	line-height: 1.08;
 	text-overflow: ellipsis;
@@ -228,11 +253,10 @@ body {
 	max-width: 100%;
 	margin-top: 2px;
 	overflow: hidden;
-	color: var(--text-color);
+	color: var(--overview-analysis-muted);
 	font-size: 11px;
 	font-weight: 500;
 	line-height: 1.2;
-	opacity: 0.66;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -241,9 +265,12 @@ body {
 .chart-card {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	min-width: 0;
+	padding: 16px 18px 18px;
 	background: transparent;
-	border-color: transparent;
+	border: 0;
+	border-right: 1px solid var(--overview-panel-divider);
+	border-radius: 0;
 	box-shadow: none;
 }
 
@@ -258,11 +285,12 @@ body {
 .achievement-card {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
-	background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
-	linear-gradient(180deg, var(--primary-color) 90%, rgba(255, 251, 230, 0.1) 100%);
-	border-color: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(10px);
+	min-width: 0;
+	padding: 16px 18px 18px;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 .eval-result-box {
@@ -276,28 +304,28 @@ body {
 .eval-result {
 	padding: 7px 10px;
 	border: 1px solid transparent;
-	border-radius: 8px;
-	color: #455043;
+	border-radius: 6px;
 	font-size: 12px;
 	font-weight: 700;
 	line-height: 1.15;
 }
 
 .eval-excellent {
-	background: #e5efd2;
-	border-color: #cbdba9;
+	background: var(--eval-excellent-background);
+	border-color: var(--eval-excellent-border);
+	color: var(--eval-excellent-text);
 }
 
 .eval-normal {
-	background: #f0ece4;
-	border-color: #ddd5c7;
-	color: #665f55;
+	background: var(--eval-normal-background);
+	border-color: var(--eval-normal-border);
+	color: var(--eval-normal-text);
 }
 
 .eval-poor {
-	background: #f6dfca;
-	border-color: #eac2a1;
-	color: #875333;
+	background: var(--eval-poor-background);
+	border-color: var(--eval-poor-border);
+	color: var(--eval-poor-text);
 }
 
 /* 全宽履历卡片样式 */
@@ -492,11 +520,7 @@ body {
 
 @media (max-width: 900px) {
 	.dashboard-grid {
-		grid-template-columns: minmax(260px, 0.9fr) minmax(360px, 1.35fr);
-	}
-
-	.achievement-card {
-		grid-column: 1 / -1;
+		grid-template-columns: minmax(260px, 0.9fr) minmax(500px, 1.35fr);
 	}
 
 	.eval-result-box {
@@ -544,10 +568,20 @@ body {
 
 	.dashboard-grid {
 		grid-template-columns: minmax(0, 1fr);
+		gap: 14px;
+	}
+
+	.overview-secondary-panel {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.chart-card {
+		border-right: 0;
+		border-bottom: 1px solid var(--overview-panel-divider);
 	}
 
 	.achievement-card {
-		grid-column: auto;
+		border-top: 0;
 	}
 
 	.chart-container {
